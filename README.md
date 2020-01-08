@@ -6,8 +6,7 @@
 Este documento explica realizar a integração com a API de E-Commerce
  para começar a realizar transações.
 
-Este documento descreve o **SKD
- em PHP** utilizado para nossa API.
+Este documento descreve o **SDK em PHP** utilizado para nossa API.
 
 ## Requerimentos
 
@@ -264,14 +263,8 @@ $response = $request->send(json_encode($recurringTransaction))
 
 Para criar uma boleto é necessário preencher as informações obrigatorias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de transção é necessário instanciar os models da boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**. Para enviar a transação é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de transção é necessário instanciar os models da boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**. Para enviar a transação é necessário instanciar **BankSlipTransaction** onde o token JWT deve ser passado como parâmetro.
 ```PHP
-    require_once '../Address/Billing.php';
-    require_once '../Customer.php';
-    require_once '../BankSlip.php';
-    require_once '../Payment.php';
-    require_once '../BankSlipTransaction.php';
-    require_once '../Request/BankSlipRequest.php';
 
     $billing = new Billing();
     
