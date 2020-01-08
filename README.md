@@ -33,7 +33,9 @@ Para utilizar este SDK
  
  ```
 
-A API é capaz de realizar transações de **cartão de crédito**; geração de **boletos**; e **recorrências** diárias, semanais, e mensais.
+A API é capaz de realizar 
+
+ções de **cartão de crédito**; geração de **boletos**; e **recorrências** diárias, semanais, e mensais.
 
 ## Realizar Login
 
@@ -172,7 +174,7 @@ $response = $request->send(json_encode($creditCardTransaction)
 
 Para criar uma recorrência é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de transação é necessário instanciar os models da recorrência, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **CreditInstallment**, **Payment**, **RecurringTransaction**. Para enviar a transação é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de transação é necessário instanciar os models da recorrência, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **CreditInstallment**, **Payment**, **RecurringTransaction**. Para enviar a recorrência é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
 
 
 ``` PHP
@@ -263,7 +265,7 @@ $response = $request->send(json_encode($recurringTransaction))
 
 Para criar uma boleto é necessário preencher as informações obrigatorias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de transção é necessário instanciar os models da boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**. Para enviar a transação é necessário instanciar **BankSlipTransaction** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de transção é necessário instanciar os models da boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**. Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** onde o token JWT deve ser passado como parâmetro.
 ```PHP
 
     $billing = new Billing();
