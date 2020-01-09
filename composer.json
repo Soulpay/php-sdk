@@ -20,8 +20,6 @@
         "source": "https://github.com/Soulpay/php-sdk"
     },
     "autoload": {
-        "psr-4": {
-            "classmap":["src"]
-        }
+        "classmap":["src"]
     }
 }
