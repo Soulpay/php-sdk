@@ -313,7 +313,7 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
   // Passar o token JWT aqui.
     $bankSlipRequest = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
     
-$response = $loginRequest->send(json_encode($login))
+$response = $bankSlipRequest->send(json_encode($bankSlipTransaction))
     
 ```
 
