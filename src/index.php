@@ -1,6 +1,5 @@
 <?php
     namespace Soulpay;
-    
     require_once 'Address/Billing.php';
     require_once 'Address/Shipping.php';
     require_once 'Auth/Login.php';
