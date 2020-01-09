@@ -3,10 +3,8 @@
 
 ## Introdução
 
-Este documento explica realizar a integração com a API de E-Commerce
- para começar a realizar transações.
-
-Este documento descreve o **SDK em PHP** utilizado para nossa API.
+Este documento explica como realizar a integração com a API de E-Commerce
+utilizando nosso **SDK em PHP** para começar a realizar transações.
 
 ## Requerimentos
 
@@ -16,7 +14,7 @@ Este documento descreve o **SDK em PHP** utilizado para nossa API.
 
 ```BASH
 
-composer requier soulpay/soulpay-sdk
+composer require soulpay/soulpay-sdk
 
 ```
 
@@ -25,21 +23,26 @@ composer requier soulpay/soulpay-sdk
 Para utilizar este SDK
  recomenda-se leitura da [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html)
  
- Para utilizar este SDK em ambiente de teste é necessario colocar o ultimo parametro do construtor de uma request como false, como de monstrado abaixo.
+ A API é capaz de realizar transações de **cartão de crédito**, geração de **boletos** e **recorrências** diárias, semanais, mensais ou outras escolhas de período.
+ 
+## Ambientes
+
+ Para utilizar este SDK em ambiente de teste é necessario colocar o ultimo parametro do construtor de uma request como false, como demonstrado abaixo.
  
  ```PHP
+ // Request para o ambiente de desenvolvimento
+ $request = new CreditCardRequest('Sua chave JWT aqui', false);
  
- $request = new CreditCardRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY', false);
- 
+ // Request para o ambiente de produção
+ $request = new CreditCardRequest('Sua chave JWT aqui', true);
  ```
-
-A API é capaz de realizar 
-
-ções de **cartão de crédito**; geração de **boletos**; e **recorrências** diárias, semanais, e mensais.
 
 ## Realizar Login
 
-Para realizar o login é necessário criar um objeto **Login** e preenche-lo com os seguintes dados **Email**, **Senha** e **Hash**. Para enviar a request é necessário instanciar o método **LoginRequest**.
+Para realizar o login é necessário criar um objeto **Login**, preenche-lo com **Email**, **Password** e **Hash**. 
+Logo após, é necessário instanciar a classe **LoginRequest** e passar o objeto **Login** (previamente criado) ao método **send**.
+
+### Vejamos um exemplo abaixo
 
 ```PHP
 
@@ -47,7 +50,7 @@ $login = new Login();
 
 $login->setEmail('testedev@dev.com');
 $login->setPassword('testeDev');
-$login->setHash('2b1ba7b7a8ce5c1a003935625bf40047');
+$login->setHash('Seu hash aqui');
 
 $loginRequest = new LoginRequest();
 
@@ -57,25 +60,26 @@ $response = $loginRequest->send(json_encode($login));
 
 ## Refresh Token
 
-Para utilizar a API é necessário ter um token JWT valido, caso o token esteja expirando é possível gerar um novo token. Caso o token já tenha expirado realizar um novo login.
+Para que não seja necessário fazer login sempre que seu token JWT expirar, criamos o método **refreshToken** para facilitação do processo.
 
-Para gerar um novo token é necessário ter o **Refresh Token** adquirido ao realizar o login, e também é necessário passar o token JWT como parâmetro da **Token Request**.
+Para realizar a atualização de seu token é necessário criar um objeto **Token** e preenche-lo com seu refreshToken.
+Logo após, é necessário instanciar a classe **tokenRequest** passando seu token JWT e em seguida passar o objeto **token** (previamente criado) ao método **send**.
 
 ```PHP
     $token = new Token();
 
     // Utilizar o refresh token para gerar um novo token
-    $token->setRefreshToken('efd858e612015242a25b000b8b19bb76YZMm567WOFsrYqcxsZK/9jKI7Zd2b2Fokw4Vvw2w/SB7Jvwz2uTy0+98oCbYsLGK');
+    $token->setRefreshToken('Seu refresh token');
 
     // Passar o token JWT aqui.
-    $tokenRequest = new TokenRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjI1NzExMSwiZXhwIjoxNTc4ODQ5MTExfQ.R3RWh7ukCJUCzzZ7t6V1dOO43YLfc6fmOREu0JgFCTo');
+    $tokenRequest = new TokenRequest('Seu token JWT');
 
    $response = $tokenRequest->send(json_encode($token));
 ```
 
 ## Gerar Novo Refresh Token
 
-Se por algum motivo for necessário gerar um novo **Refresh Token** essa função está disponivel na API. Para um novo refresh token é necessário passar como parâmetro o  antigo **Refresh Token** e o **Token JWT** valido.
+Se por algum motivo for necessário gerar um novo **Refresh Token** essa função está disponivel na API. Para um novo refresh token é necessário passar como parâmetro o antigo **Refresh Token** e o **Token JWT** valido.
 
 ```PHP
 
@@ -91,14 +95,14 @@ Se por algum motivo for necessário gerar um novo **Refresh Token** essa funçã
 
 ```
 
-## Criando um Transação
+## Criando uma Transação
 
 Para criar uma transação é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de login é necessário instanciar os models da transação, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **CreditInstallment**, **Payment**, **CreditCardTransaction**. Para enviar a transação é necessário instanciar **CreditCardTransaction** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de login, é necessário instanciar os models da transação, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **CreditInstallment**, **Payment**, **CreditCardTransaction**.  
+Para enviar a transação é necessário instanciar **CreditCardTransaction** onde o token JWT deve ser passado como parâmetro.
 
 ``` PHP
-
 $customer = new Customer();
 $customer->setId('1');
 $customer->setName('cliente');
@@ -170,11 +174,12 @@ $request = new CreditCardRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiO
 $response = $request->send(json_encode($creditCardTransaction)
 
 ```
+
 ## Criando uma Recorrência
 
 Para criar uma recorrência é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de transação é necessário instanciar os models da recorrência, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **CreditInstallment**, **Payment**, **RecurringTransaction**. Para enviar a recorrência é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de transação, é necessário instanciar os models da recorrência, sendo esses **Customer**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **CreditInstallment**, **Payment**, **RecurringTransaction**. Para enviar a recorrência é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
 
 
 ``` PHP
@@ -263,9 +268,11 @@ $response = $request->send(json_encode($recurringTransaction))
 
 ## Gerando Boleto Bancario
 
-Para criar uma boleto é necessário preencher as informações obrigatorias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
+Para criar um boleto é necessário preencher as informações obrigatorias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
 
-Seguindo a mesma ideia de transção é necessário instanciar os models da boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**. Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** onde o token JWT deve ser passado como parâmetro.
+Seguindo a mesma ideia de transação é necessário instanciar os models de boleto, sendo esses **Customer**, **Billing**, **BankSlip**, **Payment**, **BankSLipTransaction**, **BankSlipRequest**.  
+Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** onde o token JWT deve ser passado como parâmetro.
+
 ```PHP
 
     $billing = new Billing();
@@ -309,9 +316,10 @@ Seguindo a mesma ideia de transção é necessário instanciar os models da bole
 $response = $loginRequest->send(json_encode($login))
     
 ```
+
 ## Consultar Transações
 
-Para consultar a uma transação é necessário instanciar a classe request do tipo de transação que é desejado consultar como no exemplo abaixo para recorrencia, deve se passar o **Order ID** como parâmetro de busca.
+Para consultar a uma transação, é necessário instanciar a classe **request** do tipo de transação que é desejado consultar como no exemplo abaixo para recorrencia, deve se passar o **Order ID** como parâmetro de busca.
 
 ```PHP
 
@@ -323,5 +331,6 @@ $response $request->get(253);
 
 ```
 
-## Supporte
+## Suporte
 
+[Utilizar o issues do github](https://github.com/Soulpay/php-sdk/issues)
