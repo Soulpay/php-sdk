@@ -5,6 +5,7 @@ class Login implements JsonSerializable
     private $email;
     private $password;
     private $hash;
+    private $userUID;
 
     public function jsonSerialize()
     {
@@ -75,6 +76,26 @@ class Login implements JsonSerializable
     public function setHash($hash)
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of hash
+     */
+    public function getUserUID()
+    {
+        return $this->userUID;
+    }
+
+    /**
+     * Set the value of userUID
+     *
+     * @return  self
+     */
+    public function setUserUID($userUID)
+    {
+        $this->userUID = $userUID;
 
         return $this;
     }
