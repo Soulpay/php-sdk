@@ -13,6 +13,7 @@ class Customer implements JsonSerializable
     private $new;
     private $vip;
     private $taxId;
+    private $visitor;
 
     public function jsonSerialize()
     {
@@ -243,6 +244,26 @@ class Customer implements JsonSerializable
     public function setTaxId($taxId)
     {
         $this->taxId = $taxId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of visitor
+     */
+    public function getVisitor()
+    {
+        return $this->visitor;
+    }
+
+    /**
+     * Set the value of visitor
+     *
+     * @return  self
+     */
+    public function setVisitor($visitor)
+    {
+        $this->visitor = $visitor;
 
         return $this;
     }
