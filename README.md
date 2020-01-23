@@ -115,6 +115,7 @@ $customer->setPhone2('551112345678');
 $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
+$customer->setVisitor('gerado pelo JS');
 
 $billing = new Billing();
 
@@ -196,6 +197,7 @@ $customer->setPhone2('551112345678');
 $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
+$customer->setVisitor('gerado pelo JS');
 
 $billing = new Billing();
 
