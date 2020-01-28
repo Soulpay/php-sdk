@@ -13,4 +13,12 @@
     require_once 'Request/RefreshTokenRequest.php';
     require_once 'Request/TokenRequest.php';
     require_once 'Request/TransactionRequest.php';
+    require_once 'Transaction/CreditCard.php';
+    require_once 'Transaction/BankSlip.php';
+    require_once 'Transaction/BankSlipTransaction.php';
+    require_once 'Transaction/CreditCardTransaction.php';
+    require_once 'Transaction/CreditInstallment.php';
+    require_once 'Transaction/Payment.php';
+    require_once 'Transaction/Recurring.php';
+    require_once 'Transaction/RecurringTransaction.php';
 ?>
