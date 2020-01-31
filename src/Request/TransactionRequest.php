@@ -6,7 +6,7 @@ abstract class TransactionRequest extends Request
 {
 
     private $jwt;
-    private $authorization;
+    protected $authorization;
     public function __construct($url, $jwt,$isProduction)
     {
         $this->jwt = $jwt;

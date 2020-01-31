@@ -21,4 +21,5 @@
     require_once 'Transaction/Payment.php';
     require_once 'Transaction/Recurring.php';
     require_once 'Transaction/RecurringTransaction.php';
+    require_once 'Transaction/RecurringCancel.php';
 ?>
