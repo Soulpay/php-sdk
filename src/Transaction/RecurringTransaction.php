@@ -2,6 +2,7 @@
 
 class RecurringTransaction implements JsonSerializable
 {
+    private $orderId;
     private $customer;
     private $billing;
     private $shipping;
@@ -139,6 +140,26 @@ class RecurringTransaction implements JsonSerializable
     public function setCustomer($customer)
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of orderId
+     */
+    public function getOrderId()
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * Set the value of customer
+     *
+     * @return  self
+     */
+    public function setOrderId($orderId)
+    {
+        $this->orderId = $orderId;
 
         return $this;
     }

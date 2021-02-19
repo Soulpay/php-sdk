@@ -268,6 +268,73 @@ $response = $request->send(json_encode($recurringTransaction))
 
 ```
 
+## Alterando uma Recorrência
+
+Para alterar uma recorrência é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
+
+Seguindo a mesma ideia de transação, é necessário instanciar os models da edição de recorrência, sendo esses  **OrderId**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **Payment**. Para enviar a recorrência é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
+
+
+``` PHP
+
+$orderId = new OrderId();
+$orderId->setOrderId('1010');
+
+$billing = new Billing();
+$billing->setName('Soulpay');
+$billing->setAddress('Avenida Paulista');
+$billing->setAddress2('124');
+$billing->setDistrict('Bela vista');
+$billing->setCity('São Paulo');
+$billing->setState('SP');
+$billing->setPostalCode('01311000');
+$billing->setCountry('BR');
+$billing->setPhone('111112222233333');
+$billing->setEmail('billing@soulpay.com.br');
+
+$shipping = new Shipping();
+$shipping->setName('Soulpay');
+$shipping->setAddress('Avenida Paulista');
+$shipping->setAddress2('124');
+$shipping->setDistrict('Bela vista');
+$shipping->setCity('São Paulo');
+$shipping->setState('SP');
+$shipping->setPostalCode('01311000');
+$shipping->setCountry('BR');
+$shipping->setPhone('12345678');
+$shipping->setEmail('shipping@soulpay.com.br');
+
+$creditCard = new CreditCard();
+$creditCard->setCardHolderName('Soulpay');
+$creditCard->setNumber('4620685100802685');
+$creditCard->setExpDate('12/2022');
+
+$payment = new Payment();
+$payment->setChargeTotal(120.10);
+
+$recurring = new Recurring();
+$recurring->setPeriod('monthly');
+$recurring->setFrequency('1');
+$recurring->setInstallments('12');
+$recurring->setFirstAmount(22.00);
+$recurring->setNextFireDate('2021-01-20');
+$recurring->setFireDay('20');
+
+$recurringTransaction = new RecurringTransaction();
+$recurringTransaction->setOrderId($orderId->getOrderId());
+$recurringTransaction->setBilling($billing);
+$recurringTransaction->setShipping($shipping);
+$recurringTransaction->setCreditCard($creditCard);
+$recurringTransaction->setPayment($payment);
+$recurringTransaction->setRecurring($recurring);
+
+// Passar o token JWT aqui.
+$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
+
+$response = $request->send(json_encode($recurringTransaction))
+
+```
+
 ## Gerando Boleto Bancario
 
 Para criar um boleto é necessário preencher as informações obrigatorias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).

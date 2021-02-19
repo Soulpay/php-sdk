@@ -8,6 +8,8 @@ class Recurring implements JsonSerializable
     private $installments;
     private $firstAmount;
     private $failureThreshold;
+    private $nextFireDate;
+    private $fireDay;
 
     public function jsonSerialize()
     {
@@ -138,6 +140,46 @@ class Recurring implements JsonSerializable
     public function setFailureThreshold($failureThreshold)
     {
         $this->failureThreshold = $failureThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nextFireDate
+     */
+    public function getNextFireDate()
+    {
+        return $this->nextFireDate;
+    }
+
+    /**
+     * Set the value of firstAmount
+     *
+     * @return  self
+     */
+    public function setNextFireDate($nextFireDate)
+    {
+        $this->nextFireDate = $nextFireDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of fireDay
+     */
+    public function getFireDay()
+    {
+        return $this->fireDay;
+    }
+
+    /**
+     * Set the value of firstAmount
+     *
+     * @return  self
+     */
+    public function setFireDay($fireDay)
+    {
+        $this->fireDay = $fireDay;
 
         return $this;
     }

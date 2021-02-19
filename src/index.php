@@ -18,6 +18,7 @@
     require_once 'Transaction/BankSlipTransaction.php';
     require_once 'Transaction/CreditCardTransaction.php';
     require_once 'Transaction/CreditInstallment.php';
+    require_once 'Transaction/OrderId.php';
     require_once 'Transaction/Payment.php';
     require_once 'Transaction/Recurring.php';
     require_once 'Transaction/RecurringTransaction.php';
