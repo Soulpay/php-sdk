@@ -310,13 +310,13 @@ $creditCard->setNumber('4620685100802685');
 $creditCard->setExpDate('12/2022');
 
 $payment = new Payment();
-$payment->setChargeTotal(120.10);
+$payment->setChargeTotal(120);
 
 $recurring = new Recurring();
 $recurring->setPeriod('monthly');
 $recurring->setFrequency('1');
 $recurring->setInstallments('12');
-$recurring->setFirstAmount(22.00);
+$recurring->setFirstAmount(10);
 $recurring->setNextFireDate('2021-01-20');
 $recurring->setFireDay('20');
 
