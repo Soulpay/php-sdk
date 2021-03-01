@@ -116,6 +116,7 @@ $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
 $customer->setVisitor('gerado pelo JS');
+$customer->setReferenceNum('123456');
 
 $billing = new Billing();
 
@@ -198,6 +199,7 @@ $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
 $customer->setVisitor('gerado pelo JS');
+$customer->setReferenceNum('123456');
 
 $billing = new Billing();
 
@@ -361,6 +363,7 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
 
     $customer->setName('Cliente');
     $customer->setTaxId('12234554323');
+    $customer->setReferenceNum('123456');
 
     $bankSlip = new BankSlip();
 
