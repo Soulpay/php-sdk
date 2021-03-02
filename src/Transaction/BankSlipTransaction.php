@@ -1,6 +1,7 @@
 <?php
 class BankSlipTransaction implements JsonSerializable
 {
+    private $referenceNum;
     private $customer;
     private $billing;
     private $bankSlip;
@@ -17,6 +18,18 @@ class BankSlipTransaction implements JsonSerializable
         );
 
         return $vars;
+    }
+
+    public function getReferenceNum()
+    {
+        return $this->referenceNum;
+    }
+
+    public function setReferenceNum($referenceNum)
+    {
+        $this->referenceNum = $referenceNum;
+
+        return $this;
     }
 
     public function getCustomer()

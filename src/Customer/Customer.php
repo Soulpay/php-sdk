@@ -14,7 +14,6 @@ class Customer implements JsonSerializable
     private $vip;
     private $taxId;
     private $visitor;
-    private $referenceNum;
 
     public function jsonSerialize()
     {
@@ -269,23 +268,4 @@ class Customer implements JsonSerializable
         return $this;
     }
 
-    /**
-     * Get the value of visitor
-     */
-    public function getReferenceNum()
-    {
-        return $this->referenceNum;
-    }
-
-    /**
-     * Set the value of visitor
-     *
-     * @return  self
-     */
-    public function setReferenceNum($referenceNum)
-    {
-        $this->referenceNum = $referenceNum;
-
-        return $this;
-    }
 }

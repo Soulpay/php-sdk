@@ -2,6 +2,7 @@
 
 class RecurringTransaction implements JsonSerializable
 {
+    private $referenceNum;
     private $orderId;
     private $customer;
     private $billing;
@@ -22,6 +23,26 @@ class RecurringTransaction implements JsonSerializable
         );
 
         return $vars;
+    }
+
+    /**
+     * Get the value of referenceNum
+     */
+    public function getReferenceNum()
+    {
+        return $this->referenceNum;
+    }
+
+    /**
+     * Set the value of referenceNum
+     *
+     * @return  self
+     */
+    public function setReferenceNum($referenceNum)
+    {
+        $this->referenceNum = $referenceNum;
+
+        return $this;
     }
 
     /**
@@ -153,7 +174,7 @@ class RecurringTransaction implements JsonSerializable
     }
 
     /**
-     * Set the value of customer
+     * Set the value of orderId
      *
      * @return  self
      */
@@ -163,4 +184,5 @@ class RecurringTransaction implements JsonSerializable
 
         return $this;
     }
+  
 }

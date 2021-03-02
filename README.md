@@ -104,6 +104,7 @@ Para enviar a transação é necessário instanciar **CreditCardTransaction** on
 
 ``` PHP
 $customer = new Customer();
+
 $customer->setId('1');
 $customer->setName('cliente');
 $customer->setEmail('cliente@cliente.com');
@@ -164,6 +165,7 @@ $payment->setCreditInstallment($creditInstallment);
 
 $creditCardTransaction = new CreditCardTransaction();
 
+$creditCardTransaction->setReferenceNum('123456');
 $creditCardTransaction->setCustomer($customer);
 $creditCardTransaction->setBilling($billing);
 $creditCardTransaction->setShipping($shipping);
@@ -187,6 +189,7 @@ Seguindo a mesma ideia de transação, é necessário instanciar os models da re
 ``` PHP
 
 $customer = new Customer();
+
 $customer->setId('1');
 $customer->setName('cliente');
 $customer->setEmail('cliente@cliente.com');
@@ -235,7 +238,6 @@ $creditCard->setExpDate('12/2022');
 $creditCard->setCvvNumber('420');
 
 $creditInstallment = new CreditInstallment();
-
 $creditInstallment->setNumberOfInstallments(1);
 $creditInstallment->setChargeInterest('N');
 
@@ -256,6 +258,7 @@ $recurring->setFailureThreshold(15);
 
 $recurringTransaction = new RecurringTransaction();
 
+$recurringTransaction->setReferenceNum('123456');
 $recurringTransaction->setCustomer($customer);
 $recurringTransaction->setBilling($billing);
 $recurringTransaction->setShipping($shipping);
@@ -279,10 +282,8 @@ Seguindo a mesma ideia de transação, é necessário instanciar os models da ed
 
 ``` PHP
 
-$orderId = new OrderId();
-$orderId->setOrderId('1010');
-
 $billing = new Billing();
+
 $billing->setName('Soulpay');
 $billing->setAddress('Avenida Paulista');
 $billing->setAddress2('124');
@@ -295,6 +296,7 @@ $billing->setPhone('111112222233333');
 $billing->setEmail('billing@soulpay.com.br');
 
 $shipping = new Shipping();
+
 $shipping->setName('Soulpay');
 $shipping->setAddress('Avenida Paulista');
 $shipping->setAddress2('124');
@@ -307,14 +309,17 @@ $shipping->setPhone('12345678');
 $shipping->setEmail('shipping@soulpay.com.br');
 
 $creditCard = new CreditCard();
+
 $creditCard->setCardHolderName('Soulpay');
 $creditCard->setNumber('4620685100802685');
 $creditCard->setExpDate('12/2022');
 
 $payment = new Payment();
+
 $payment->setChargeTotal(120);
 
 $recurring = new Recurring();
+
 $recurring->setPeriod('monthly');
 $recurring->setFrequency('1');
 $recurring->setInstallments('12');
@@ -323,7 +328,8 @@ $recurring->setNextFireDate('2021-01-20');
 $recurring->setFireDay('20');
 
 $recurringTransaction = new RecurringTransaction();
-$recurringTransaction->setOrderId($orderId->getOrderId());
+
+$recurringTransaction->setOrderId('123456');
 $recurringTransaction->setBilling($billing);
 $recurringTransaction->setShipping($shipping);
 $recurringTransaction->setCreditCard($creditCard);
@@ -371,11 +377,13 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
     $bankSlip->setInstructions('teste API');
 
     $payment = new Payment();
+    
     $payment->setChargeTotal(1.00);
     $payment->setCurrencyCode('BRL');
 
     $bankSlipTransaction = new BankSlipTransaction();
 
+    $bankSlipTransaction->setReferenceNum('123456');
     $bankSlipTransaction->setCustomer($customer);
     $bankSlipTransaction->setBilling($billing);
     $bankSlipTransaction->setBankSlip($bankSlip);
