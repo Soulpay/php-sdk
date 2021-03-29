@@ -330,6 +330,7 @@ $recurring->setFireDay('20');
 $recurringTransaction = new RecurringTransaction();
 
 $recurringTransaction->setOrderId('123456');
+$recurringTransaction->setReferenceNum('101010');
 $recurringTransaction->setBilling($billing);
 $recurringTransaction->setShipping($shipping);
 $recurringTransaction->setCreditCard($creditCard);
@@ -339,7 +340,7 @@ $recurringTransaction->setRecurring($recurring);
 // Passar o token JWT aqui.
 $request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
 
-$response = $request->send(json_encode($recurringTransaction))
+$response = $request->put(json_encode($recurringTransaction))
 
 ```
 
