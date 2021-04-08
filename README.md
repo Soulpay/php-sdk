@@ -416,9 +416,7 @@ Para consultar um boleto, é necessário instanciar a classe **BankSlipRequest**
 ```PHP
 
 // Passar o token JWT aqui.
-$request = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-    eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.
-    45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+$request = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
 
 // Order ID
 $response = $request->get(253);
