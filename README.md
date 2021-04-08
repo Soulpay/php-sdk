@@ -117,7 +117,6 @@ $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
 $customer->setVisitor('gerado pelo JS');
-$customer->setReferenceNum('123456');
 
 $billing = new Billing();
 
@@ -202,7 +201,6 @@ $customer->setCreatedAt('2019-11-25');
 $customer->setNew(false);
 $customer->setVip(true);
 $customer->setVisitor('gerado pelo JS');
-$customer->setReferenceNum('123456');
 
 $billing = new Billing();
 
@@ -370,7 +368,6 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
 
     $customer->setName('Cliente');
     $customer->setTaxId('12234554323');
-    $customer->setReferenceNum('123456');
 
     $bankSlip = new BankSlip();
 
@@ -408,7 +405,23 @@ Para consultar a uma transação, é necessário instanciar a classe **request**
 $request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
 
 // Order ID
-$response $request->get(253);
+$response = $request->get(253);
+
+```
+
+## Consultar Boletos
+
+Para consultar um boleto, é necessário instanciar a classe **BankSlipRequest** como no exemplo abaixo, deve se passar o **Order ID** como parâmetro de busca.
+
+```PHP
+
+// Passar o token JWT aqui.
+$request = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+    eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.
+    45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+
+// Order ID
+$response = $request->get(253);
 
 ```
 
