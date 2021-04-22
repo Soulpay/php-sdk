@@ -423,6 +423,20 @@ $response = $request->get(253);
 
 ```
 
+## Consultar transações de uma recorrência
+
+Para consultar transações de uma recorrência, é necessário instanciar a classe **RecurringRequest** como no exemplo abaixo, deve se passar o **Order ID** como parâmetro de busca.
+
+```PHP
+
+// Passar o token JWT aqui.
+$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+
+// Order ID
+$response = $request->get(1265);
+
+```
+
 ## Suporte
 
 [Utilizar o issues do github](https://github.com/Soulpay/php-sdk/issues)
