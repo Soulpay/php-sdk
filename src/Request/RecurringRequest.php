@@ -20,7 +20,7 @@ class RecurringRequest extends TransactionRequest
         try {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $this->authorization));
-            curl_setopt($curl, CURLOPT_URL, $this->url.'/'.$data->getOrderId());
+            curl_setopt($curl, CURLOPT_URL, $this->url . '/' . $data->getOrderId());
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($curl);
@@ -32,12 +32,12 @@ class RecurringRequest extends TransactionRequest
         }
     }
 
-    public function put($data)
+    public function put($id, $data)
     {
         try {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json', $this->authorization));
-            curl_setopt($curl, CURLOPT_URL, $this->url);
+            curl_setopt($curl, CURLOPT_URL, $this->url . '/' . $id);
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
@@ -56,7 +56,7 @@ class RecurringRequest extends TransactionRequest
             $curl = curl_init();
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_HTTPHEADER, array($this->authorization));
-            curl_setopt($curl, CURLOPT_URL, $this->url.'/'.'list/'.$id);
+            curl_setopt($curl, CURLOPT_URL, $this->url . '/' . $id);
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($curl);
@@ -65,8 +65,6 @@ class RecurringRequest extends TransactionRequest
             $return['response'] = $result;
             return $return;
         } catch (Exception $e) {
-
         }
     }
-    
 }

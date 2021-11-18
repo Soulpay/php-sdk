@@ -39,7 +39,7 @@ Para utilizar este SDK
 
 ## Realizar Login
 
-Para realizar o login é necessário criar um objeto **Login**, preenche-lo com **Email**, **Password** e **Hash**. 
+Para realizar o login é necessário criar um objeto **Login**, preenche-lo com **Email** e **Password**. 
 Logo após, é necessário instanciar a classe **LoginRequest** e passar o objeto **Login** (previamente criado) ao método **send**.
 
 ### Vejamos um exemplo abaixo
@@ -50,9 +50,8 @@ $login = new Login();
 
 $login->setEmail('testedev@dev.com');
 $login->setPassword('testeDev');
-$login->setHash('Seu hash aqui');
 
-$loginRequest = new LoginRequest();
+$loginRequest = new LoginRequest(false);
 
 $response = $loginRequest->send(json_encode($login));
 
@@ -72,7 +71,7 @@ Logo após, é necessário instanciar a classe **tokenRequest** passando seu tok
     $token->setRefreshToken('Seu refresh token');
 
     // Passar o token JWT aqui.
-    $tokenRequest = new TokenRequest('Seu token JWT');
+    $tokenRequest = new TokenRequest('Seu token JWT', false);
 
    $response = $tokenRequest->send(json_encode($token));
 ```
@@ -124,7 +123,7 @@ $billing->setName('Soulpay');
 $billing->setAddress('Avenida Paulista');
 $billing->setAddress2('124');
 $billing->setDistrict('Bela vista');
-$billing->setCity('Sorocaba');
+$billing->setCity('São Paulo');
 $billing->setState('SP');
 $billing->setPostalCode('01311000');
 $billing->setCountry('BR');
@@ -137,7 +136,7 @@ $shipping->setName('Soulpay');
 $shipping->setAddress('Avenida Paulista');
 $shipping->setAddress2('124');
 $shipping->setDistrict('Bela vista');
-$shipping->setCity('Sorocaba');
+$shipping->setCity('São Paulo');
 $shipping->setState('SP');
 $shipping->setPostalCode('01311000');
 $shipping->setCountry('BR');
@@ -158,7 +157,7 @@ $creditInstallment->setChargeInterest('N');
 
 $payment = new Payment();
 
-$payment->setChargeTotal(120.10);
+$payment->setChargeTotal(10.5);
 $payment->setCurrencyCode('BRL');
 $payment->setCreditInstallment($creditInstallment);
 
@@ -172,7 +171,7 @@ $creditCardTransaction->setCreditCard($creditCard);
 $creditCardTransaction->setPayment($payment);
 
 // Passar o token JWT aqui.
-$request = new CreditCardRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
+$request = new CreditCardRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY', false);
 
 $response = $request->send(json_encode($creditCardTransaction)
 
@@ -208,84 +207,6 @@ $billing->setName('Soulpay');
 $billing->setAddress('Avenida Paulista');
 $billing->setAddress2('124');
 $billing->setDistrict('Bela vista');
-$billing->setCity('Sorocaba');
-$billing->setState('SP');
-$billing->setPostalCode('01311000');
-$billing->setCountry('BR');
-$billing->setPhone('111112222233333');
-$billing->setEmail('billing@soulpay.com.br');
-
-$shipping = new Shipping();
-
-$shipping->setName('Soulpay');
-$shipping->setAddress('Avenida Paulista');
-$shipping->setAddress2('124');
-$shipping->setDistrict('Bela vista');
-$shipping->setCity('Sorocaba');
-$shipping->setState('SP');
-$shipping->setPostalCode('01311000');
-$shipping->setCountry('BR');
-$shipping->setPhone('12345678');
-$shipping->setEmail('shipping@soulpay.com.br');
-
-$creditCard = new CreditCard();
-
-$creditCard->setCardHolderName('Soulpay');
-$creditCard->setNumber('4620685100802685');
-$creditCard->setExpDate('12/2022');
-$creditCard->setCvvNumber('420');
-
-$creditInstallment = new CreditInstallment();
-$creditInstallment->setNumberOfInstallments(1);
-$creditInstallment->setChargeInterest('N');
-
-$payment = new Payment();
-
-$payment->setChargeTotal(120.10);
-$payment->setCurrencyCode('BRL');
-$payment->setCreditInstallment($creditInstallment);
-
-$recurring = new Recurring();
-
-$recurring->setStartDate('2030-01-10');
-$recurring->setPeriod('monthly');
-$recurring->setFrequency('1');
-$recurring->setInstallments('12');
-$recurring->setFirstAmount(22.00);
-$recurring->setFailureThreshold(15);
-
-$recurringTransaction = new RecurringTransaction();
-
-$recurringTransaction->setReferenceNum('123456');
-$recurringTransaction->setCustomer($customer);
-$recurringTransaction->setBilling($billing);
-$recurringTransaction->setShipping($shipping);
-$recurringTransaction->setCreditCard($creditCard);
-$recurringTransaction->setPayment($payment);
-$recurringTransaction->setRecurring($recurring);
-
-// Passar o token JWT aqui.
-$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
-
-$response = $request->send(json_encode($recurringTransaction))
-
-```
-
-## Alterando uma Recorrência
-
-Para alterar uma recorrência é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
-
-Seguindo a mesma ideia de transação, é necessário instanciar os models da edição de recorrência, sendo esses  **OrderId**, **Billing**, **Shipping**, **CreditCard**, **Recurring**, **Payment**. Para enviar a recorrência é necessário instanciar **RecurringRequest** onde o token JWT deve ser passado como parâmetro.
-
-
-``` PHP
-
-$billing = new Billing();
-
-$billing->setName('Soulpay');
-$billing->setAddress('Avenida Paulista');
-$billing->setAddress2('124');
-$billing->setDistrict('Bela vista');
 $billing->setCity('São Paulo');
 $billing->setState('SP');
 $billing->setPostalCode('01311000');
@@ -311,24 +232,31 @@ $creditCard = new CreditCard();
 $creditCard->setCardHolderName('Soulpay');
 $creditCard->setNumber('4620685100802685');
 $creditCard->setExpDate('12/2022');
+$creditCard->setCvvNumber('420');
+
+$creditInstallment = new CreditInstallment();
+$creditInstallment->setNumberOfInstallments(1);
+$creditInstallment->setChargeInterest('N');
 
 $payment = new Payment();
 
-$payment->setChargeTotal(120);
+$payment->setChargeTotal(10.5);
+$payment->setCurrencyCode('BRL');
+$payment->setCreditInstallment($creditInstallment);
 
 $recurring = new Recurring();
 
+$recurring->setStartDate('2022-01-10');
 $recurring->setPeriod('monthly');
 $recurring->setFrequency('1');
 $recurring->setInstallments('12');
-$recurring->setFirstAmount(10);
-$recurring->setNextFireDate('2021-01-20');
-$recurring->setFireDay('20');
+$recurring->setFirstAmount(20.2);
+$recurring->setFailureThreshold(15);
 
 $recurringTransaction = new RecurringTransaction();
 
-$recurringTransaction->setOrderId('123456');
-$recurringTransaction->setReferenceNum('101010');
+$recurringTransaction->setReferenceNum('123456');
+$recurringTransaction->setCustomer($customer);
 $recurringTransaction->setBilling($billing);
 $recurringTransaction->setShipping($shipping);
 $recurringTransaction->setCreditCard($creditCard);
@@ -336,9 +264,29 @@ $recurringTransaction->setPayment($payment);
 $recurringTransaction->setRecurring($recurring);
 
 // Passar o token JWT aqui.
-$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
+$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY', false);
 
-$response = $request->put(json_encode($recurringTransaction))
+$response = $request->send(json_encode($recurringTransaction))
+
+```
+
+## Ativando/desativando uma Recorrência
+
+Na edição de recorrência é necessário instanciar a model **RecurringStatus**. Para enviar a requisição é necessário instanciar **RecurringRequest**, onde o token JWT deve ser passado como parâmetro.
+
+
+``` PHP
+
+$recurringStatus = new RecurringStatus();
+
+//Passar a ação a ser executada: disable | enable
+$recurringStatus->setStatus('disable');
+
+// Passar o token JWT aqui.
+$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4', false);
+
+// Order ID
+$response = $request->put(10407, json_encode($recurringStatus));
 
 ```
 
@@ -357,7 +305,7 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
     $billing->setAddress('Avenida Paulista');
     $billing->setAddress2('124');
     $billing->setDistrict('Bela vista');
-    $billing->setCity('Sorocaba');
+    $billing->setCity('São Paulo');
     $billing->setState('SP');
     $billing->setPostalCode('01311000');
     $billing->setCountry('BR');
@@ -376,7 +324,7 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
 
     $payment = new Payment();
     
-    $payment->setChargeTotal(1.00);
+    $payment->setChargeTotal(10.5);
     $payment->setCurrencyCode('BRL');
 
     $bankSlipTransaction = new BankSlipTransaction();
@@ -389,51 +337,51 @@ Para enviar o boleto bancario é necessário instanciar **BankSlipTransaction** 
 
 
   // Passar o token JWT aqui.
-    $bankSlipRequest = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+    $bankSlipRequest = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4', false);
     
 $response = $bankSlipRequest->send(json_encode($bankSlipTransaction))
     
 ```
 
-## Consultar Transações
+## Consulta de transações
 
-Para consultar a uma transação, é necessário instanciar a classe **request** do tipo de transação que é desejado consultar como no exemplo abaixo para recorrencia, deve se passar o **Order ID** como parâmetro de busca.
+Para consultar uma transação, é necessário instanciar a classe **CreditCardRequest**. O **Order ID** deve ser passado como parâmetro de busca.
 
 ```PHP
 
 // Passar o token JWT aqui.
-$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY');
+$request = new CreditCardRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkwMzEyOSwiZXhwIjoxNTc4NDk1MTI5fQ.c0g6ynTtZHFSU3qh4bJWy-jea0VnKE4hGBTAs_uhNjY', false);
 
 // Order ID
 $response = $request->get(253);
 
 ```
 
-## Consultar Boletos
+## Consulta de boletos
 
-Para consultar um boleto, é necessário instanciar a classe **BankSlipRequest** como no exemplo abaixo, deve se passar o **Order ID** como parâmetro de busca.
+Para consultar um boleto, é necessário instanciar a classe **BankSlipRequest**. O **Order ID** deve ser passado como parâmetro de busca.
 
 ```PHP
 
 // Passar o token JWT aqui.
-$request = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+$request = new BankSlipRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4', false);
 
 // Order ID
 $response = $request->get(253);
 
 ```
 
-## Consultar transações de uma recorrência
+## Consulta de recorrências
 
-Para consultar transações de uma recorrência, é necessário instanciar a classe **RecurringRequest** como no exemplo abaixo, deve se passar o **Order ID** como parâmetro de busca.
+Para consultar uma recorrência, é necessário instanciar a classe **RecurringRequest**. O **Order ID** deve ser passado como parâmetro de busca.
 
 ```PHP
 
 // Passar o token JWT aqui.
-$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4');
+$request = new RecurringRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjA3Mzc0MiwiZXhwIjoxNTc4NjY1NzQyfQ.45tr4BlNhzRQQc1nLw9C6kUqMpwS1WxdYptSIBmHtE4', false);
 
 // Order ID
-$response = $request->get(1265);
+$response = $request->get(253);
 
 ```
 
