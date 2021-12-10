@@ -22,4 +22,5 @@ require_once 'Transaction/OrderId.php';
 require_once 'Transaction/Payment.php';
 require_once 'Transaction/Recurring.php';
 require_once 'Transaction/RecurringStatus.php';
+require_once 'Transaction/RecurringTransaction.php';
 ?>
