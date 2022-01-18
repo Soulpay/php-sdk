@@ -4,14 +4,13 @@ abstract class Request
 {
     protected $url;
 
-    public function __construct($url,$isProduction)
+    public function __construct($url, $isProduction)
     {
-        if($isProduction){
-            $this->url = "https://api.portalsoulpay.com.br/api/v1/";
-        }else{
+        if ($isProduction) {
+            $this->url = "https://mercury.viainvestgrupo.com.br/api/v1/";
+        } else {
             $this->url = "https://dev-api.portalsoulpay.com.br/api/v1/";
         }
-        $this->url = $this->url.$url;
+        $this->url = $this->url . $url;
     }
-
 }
