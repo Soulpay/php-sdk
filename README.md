@@ -67,18 +67,10 @@ Para enviar a transação é necessário instanciar **CreditCardTransaction** on
 ``` PHP
 $customer = new Customer();
 
-$customer->setId('1');
 $customer->setName('cliente');
 $customer->setEmail('cliente@cliente.com');
 $customer->setDob('1997-10-03');
-$customer->setIpAddress('192.168.10.15');
 $customer->setTaxId('1234134141');
-$customer->setPhone1('551112345678');
-$customer->setPhone2('551112345678');
-$customer->setCreatedAt('2019-11-25');
-$customer->setNew(false);
-$customer->setVip(true);
-$customer->setVisitor('gerado pelo JS');
 
 $billing = new Billing();
 
@@ -151,18 +143,10 @@ Seguindo a mesma ideia de transação, é necessário instanciar os models da re
 
 $customer = new Customer();
 
-$customer->setId('1');
 $customer->setName('cliente');
 $customer->setEmail('cliente@cliente.com');
 $customer->setDob('1997-10-03');
-$customer->setIpAddress('192.168.10.15');
 $customer->setTaxId('1234134141');
-$customer->setPhone1('551112345678');
-$customer->setPhone2('551112345678');
-$customer->setCreatedAt('2019-11-25');
-$customer->setNew(false);
-$customer->setVip(true);
-$customer->setVisitor('gerado pelo JS');
 
 $billing = new Billing();
 
