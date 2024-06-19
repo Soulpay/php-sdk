@@ -57,43 +57,6 @@ $response = $loginRequest->send(json_encode($login));
 
 ```
 
-## Refresh Token
-
-Para que não seja necessário fazer login sempre que seu token JWT expirar, criamos o método **refreshToken** para facilitação do processo.
-
-Para realizar a atualização de seu token é necessário criar um objeto **Token** e preenche-lo com seu refreshToken.
-Logo após, é necessário instanciar a classe **tokenRequest** passando seu token JWT e em seguida passar o objeto **token** (previamente criado) ao método **send**.
-
-```PHP
-    $token = new Token();
-
-    // Utilizar o refresh token para gerar um novo token
-    $token->setRefreshToken('Seu refresh token');
-
-    // Passar o token JWT aqui.
-    $tokenRequest = new TokenRequest('Seu token JWT', false);
-
-   $response = $tokenRequest->send(json_encode($token));
-```
-
-## Gerar Novo Refresh Token
-
-Se por algum motivo for necessário gerar um novo **Refresh Token** essa função está disponivel na API. Para um novo refresh token é necessário passar como parâmetro o antigo **Refresh Token** e o **Token JWT** valido.
-
-```PHP
-
- $refreshToken = new RefreshToken();
- 
-    // Utilizar o refresh token para gerar um novo token
-    $refreshToken->setRefreshToken('39b847f1a7f626ee70e39d3529ce790e6QVAo/IFaFIXmwU4APyTRms3zE/JqpU04qRgZUoyHbSBdtsDJGH1fCeahkDUouSS');
-
-    // Passar o token JWT aqui.
-    $refreshTokenRequest = new RefreshTokenRequest('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMsImlhdCI6MTU3NjI1NjQ1MywiZXhwIjoxNTc4ODQ4NDUzfQ.9HksjlwcvMZamTKaWapylh2aHdxFXFrHYUaa0PRmGis');
-
-    $response = $refreshTokenRequest->send(json_encode($refreshToken));
-
-```
-
 ## Criando uma Transação
 
 Para criar uma transação é necessário preencher as informações obrigatórias descritas na [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html).
