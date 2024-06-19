@@ -19,9 +19,6 @@ composer require soulpay/soulpay-sdk
 ```
 
 ## Vamos Começar
-
-Para utilizar este SDK
- recomenda-se leitura da [documentação](https://doc-api.portalsoulpay.com.br/docs/howTo.html)
  
  A API é capaz de realizar transações de **cartão de crédito**, geração de **boletos** e **recorrências** diárias, semanais, mensais ou outras escolhas de período.
  
